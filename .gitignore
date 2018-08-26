@@ -1,0 +1,6 @@
+Raw/
+Sounds/
+Models/
+
+*.json
+*.pyc
