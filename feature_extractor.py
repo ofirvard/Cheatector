@@ -5,11 +5,11 @@ import json
 import numpy as np
 
 features = {}
-answers = {} # 1 is lie
+answers = {}
 frame_size = 0.1
 frame_stepsize = 0.05
-datadir = "/home/ron/Downloads/Sounds/"
-speaker_file = 'speaker_features.json'.format(frame_size, frame_stepsize)
+datadir = "./Sounds/"
+speaker_file = 'speaker_features.json'
 
 with open(speaker_file, 'r') as data:
 	speaker_features = json.load(data)
@@ -17,7 +17,7 @@ total = 0
 for i, dirname in enumerate(os.listdir(datadir)):
 	speaker = dirname 
 	for filename in os.listdir(datadir + dirname):
-        	answers[filename] = 1 if "Lie" in filename else 0
+        	answers[filename] = 1 if "lie" in filename else 0
 		[Fs, x] = audioBasicIO.readAudioFile(datadir + dirname + "/" + filename)
 		speaker_feature = speaker_features[dirname]
 		st_features = audioFeatureExtraction.stFeatureExtraction(x, Fs, frame_size*Fs, frame_stepsize*Fs)

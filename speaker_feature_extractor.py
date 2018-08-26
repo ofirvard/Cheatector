@@ -4,10 +4,9 @@ import os
 import json
 import numpy as np
 
-
 features = {}
 
-datadir = "/home/ron/Downloads/Sounds/"
+datadir = "./Sounds/"
 frame_size = 0.1
 frame_stepsize = 0.05
 
@@ -21,6 +20,7 @@ for i, dirname in enumerate(os.listdir(datadir)):
 			continue
 		else:
 			filepath = datadir + dirname + '/' + filename
+			print(filename)
 			[Fs, x] = audioBasicIO.readAudioFile(filepath)
 			audio_features = audioFeatureExtraction.stFeatureExtraction(x, Fs, frame_size*Fs, frame_stepsize*Fs)
 			audio_features = np.mean(audio_features, axis=1)

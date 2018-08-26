@@ -48,22 +48,26 @@ def pad_tensor(tensor, length):
   new = torch.cat((tensor, zeros), dim = 1)
   return new
 
-def splitIndices(dataset, num_train, num_val=False, shuffle = True):
+def splitIndices(dataset, num_val):
     length = len(dataset)
-    if num_val:
-      assert(length > num_val)
-    indices = list(range(0, length))  
-    if shuffle:  
-        random.shuffle(indices)
-    if num_val:
-        val = indices[0:num_val]    
-        train = indices[num_val:num_train + num_val]
-    else:
-        num_val = length - int(num_train)
-        val = indices[0:num_val]    
-        train = indices[num_val:]
+    indices = list(range(0, length))
+    random.shuffle(indices)
+    train = indices[0:num_val]
+    val = indices[num_val:]
     return train, val
     
+def splitIndices(dataset):
+    length = len(dataset)
+    indices = list(range(0, length))
+    return indices, indices
+
+def splitIndicesleftOne(dataset, i):
+    length = len(dataset)
+    indices = list(range(0, length))
+    train = indices[0:i] + indices[i+1:] 
+    val = indices[i:i+1]
+    return train, val
+
 """
 returns two AudioDatasets: one that contains all subjects except those specified to be held out for testing, and one that contains only the held out subjects.
 If no heldout subjects are specified, then simply returns all the data in one dataset and returns None instead of a test dataset.

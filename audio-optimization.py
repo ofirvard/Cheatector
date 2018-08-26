@@ -1,8 +1,8 @@
 from pydub import AudioSegment
 import os
 
-datadir = "/home/ron/Downloads/Raw/"
-exportdir = "/home/ron/Downloads/Sounds/"
+datadir = "./Raw/"
+exportdir = "./Sounds/"
 
 def detect_leading_silence(sound, silence_threshold=-32.5, chunk_size=10):
     '''
@@ -41,7 +41,7 @@ for i, dirname in enumerate(os.listdir(datadir)):
 		sound = AudioSegment.from_file(filepath, format="wav")
 		sound = trim_silence(sound)
 		sound = to_mono(sound)
-		exportpath = "/home/ron/Downloads/Sounds/" + dirname
+		exportpath = exportdir + dirname
 		if not os.path.isdir(exportpath):
 			os.makedirs(exportpath)
 		sound.export(exportpath + "/" + filename, format="wav")
