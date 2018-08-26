@@ -34,7 +34,7 @@ class Config:
         self.dtype = (cuda.FloatTensor if self.use_gpu else FloatTensor)
         self.num_classes = 2
 	self.model = args.model
-        self.left_one = True
+        self.left_one = args.lo
 
     def __str__(self):
         properties = vars(self)
@@ -46,6 +46,7 @@ class Config:
 def parseConfig():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, default = None)
+    parser.add_argument("--lo", type=bool, default = False)
     return parser.parse_args()
 
 
